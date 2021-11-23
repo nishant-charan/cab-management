@@ -4,7 +4,7 @@ public final class Constant {
 
     public enum CabStatusEnum {
         IDLE("IDLE"),
-        IN_TRANSIT("IN_TRANSIT");
+        ON_TRIP("ON_TRIP");
 
         private String cabStatus;
 

@@ -38,13 +38,13 @@ public class CabStatusTrackingRepository {
 
         CabStatusTracking newCabStatusTracking = new CabStatusTracking();
         newCabStatusTracking.setCabDetails(cabStatusTracking.getCabDetails());
-        newCabStatusTracking.setCabStatus(Constant.CabStatusEnum.IN_TRANSIT);
+        newCabStatusTracking.setCabStatus(Constant.CabStatusEnum.ON_TRIP);
         newCabStatusTracking.setStartTime(LocalDateTime.now());
         cabStatusTrackingList.add(newCabStatusTracking);
     }
 
     public void saveCabStatusTrackingAfterTripEnd(Long cabId, CityDetails destinationCityDetails) {
-        Optional<CabStatusTracking> cabStatusTrackingOptional = getCabStatusTrackingByStatus(cabId, Constant.CabStatusEnum.IN_TRANSIT);
+        Optional<CabStatusTracking> cabStatusTrackingOptional = getCabStatusTrackingByStatus(cabId, Constant.CabStatusEnum.ON_TRIP);
         if (cabStatusTrackingOptional.isPresent()) {
             CabStatusTracking cabStatusTracking = cabStatusTrackingOptional.get();
             cabStatusTracking.setEndTime(LocalDateTime.now());

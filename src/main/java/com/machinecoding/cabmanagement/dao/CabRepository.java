@@ -30,7 +30,7 @@ public class CabRepository {
         if (cabDetailsOptional.isPresent()) {
             CabDetails cabDetails = cabDetailsOptional.get();
             if (cityDetails == null) {
-                cabDetails.setCabStatus(Constant.CabStatusEnum.IN_TRANSIT);
+                cabDetails.setCabStatus(Constant.CabStatusEnum.ON_TRIP);
             } else {
                 cabDetails.setCabStatus(Constant.CabStatusEnum.IDLE);
                 cabDetails.setCityDetails(cityDetails);

@@ -59,7 +59,7 @@ public class CabStatusTrackingRepositoryTest {
 
         Optional<CabStatusTracking> cabStatusTrackingOptional = cabStatusTrackingRepository.getCabStatusTrackingByStatus(cabDetails.getCabId(), Constant.CabStatusEnum.IDLE);
         cabStatusTrackingRepository.saveCabStatusTrackingWhileCabBooking(cabStatusTrackingOptional.get());
-        Optional<CabStatusTracking> cabStatusTrackingOptional1 = cabStatusTrackingRepository.getCabStatusTrackingByStatus(cabDetails.getCabId(), Constant.CabStatusEnum.IN_TRANSIT);
+        Optional<CabStatusTracking> cabStatusTrackingOptional1 = cabStatusTrackingRepository.getCabStatusTrackingByStatus(cabDetails.getCabId(), Constant.CabStatusEnum.ON_TRIP);
         assertTrue(cabStatusTrackingOptional1.isPresent(), "Cab status is not in transit");
     }
 

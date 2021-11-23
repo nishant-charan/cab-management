@@ -74,7 +74,7 @@ public class BookingServiceTest {
 
         bookingService.bookCab("Mumbai");
         Optional<CabStatusTracking>  cabStatusTrackingOptional = cabStatusTrackingRepository.getCabStatusTrackingByStatus(cabDetails.getCabId(),
-                Constant.CabStatusEnum.IN_TRANSIT);
+                Constant.CabStatusEnum.ON_TRIP);
         assertTrue(cabStatusTrackingOptional.isPresent(), "Cab not booked successfully");
     }
 
