@@ -1,14 +1,11 @@
 package com.machinecoding.cabmanagement.service;
 
-import com.machinecoding.cabmanagement.dao.CabRepository;
-import com.machinecoding.cabmanagement.dao.CabSchedularRepository;
+import com.machinecoding.cabmanagement.dao.CabStatusTrackingRepository;
 import com.machinecoding.cabmanagement.dao.CityRepository;
 import com.machinecoding.cabmanagement.dto.CabDetailsDto;
-import com.machinecoding.cabmanagement.dto.CabIdleDto;
-import com.machinecoding.cabmanagement.dto.CabSnapshotDto;
 import com.machinecoding.cabmanagement.dto.CityDetailsDto;
 import com.machinecoding.cabmanagement.entity.CabDetails;
-import com.machinecoding.cabmanagement.entity.CabSchedular;
+import com.machinecoding.cabmanagement.entity.CabStatusTracking;
 import com.machinecoding.cabmanagement.entity.CityDetails;
 import com.machinecoding.cabmanagement.util.Constant;
 import org.junit.jupiter.api.Assertions;
@@ -17,10 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class BookingServiceTest {
@@ -29,10 +26,7 @@ public class BookingServiceTest {
     private CityRepository cityRepository;
 
     @Autowired
-    private CabRepository cabRepository;
-
-    @Autowired
-    private CabSchedularRepository cabSchedularRepository;
+    private CabStatusTrackingRepository cabStatusTrackingRepository;
 
     @Autowired
     private BookingService bookingService;
@@ -61,9 +55,9 @@ public class BookingServiceTest {
         cabDetailsDto.setCityName("Mumbai");
         CabDetails cabDetails = bookingService.registerCab(cabDetailsDto);
 
-        Optional<CabSchedular>  cabSchedularOptional = cabSchedularRepository.getCabSchedularDetailsByStatus(cabDetails.getCabId(), cabDetails.getCabStatus());
+        Optional<CabStatusTracking>  cabStatusTrackingOptional = cabStatusTrackingRepository.getCabStatusTrackingByStatus(cabDetails.getCabId(), cabDetails.getCabStatus());
 
-        assertTrue(cabSchedularOptional.isPresent(), "Cab is registered");
+        assertTrue(cabStatusTrackingOptional.isPresent(), "Cab is registered");
     }
 
     @Test
@@ -79,9 +73,9 @@ public class BookingServiceTest {
         CabDetails cabDetails = bookingService.registerCab(cabDetailsDto);
 
         bookingService.bookCab("Mumbai");
-        Optional<CabSchedular>  cabSchedularOptional = cabSchedularRepository.getCabSchedularDetailsByStatus(cabDetails.getCabId(),
-                Constant.CabStatusEnum.IN_TRANSIT.getCabStatus());
-        assertTrue(cabSchedularOptional.isPresent(), "Cab not booked successfully");
+        Optional<CabStatusTracking>  cabStatusTrackingOptional = cabStatusTrackingRepository.getCabStatusTrackingByStatus(cabDetails.getCabId(),
+                Constant.CabStatusEnum.IN_TRANSIT);
+        assertTrue(cabStatusTrackingOptional.isPresent(), "Cab not booked successfully");
     }
 
     @Test
@@ -126,9 +120,9 @@ public class BookingServiceTest {
         bookingService.bookCab("Mumbai");
 
         bookingService.endTrip(cabDetails.getCabId(), "Mumbai");
-        Optional<CabSchedular>  cabSchedularOptional = cabSchedularRepository.getCabSchedularDetailsByStatus(cabDetails.getCabId(),
-                Constant.CabStatusEnum.IDLE.getCabStatus());
-        assertTrue(cabSchedularOptional.isPresent(), "Trip does not end");
+        Optional<CabStatusTracking>  cabStatusTrackingOptional = cabStatusTrackingRepository.getCabStatusTrackingByStatus(cabDetails.getCabId(),
+                Constant.CabStatusEnum.IDLE);
+        assertTrue(cabStatusTrackingOptional.isPresent(), "Trip does not end");
     }
 
     @Test

@@ -30,9 +30,9 @@ public class CabRepository {
         if (cabDetailsOptional.isPresent()) {
             CabDetails cabDetails = cabDetailsOptional.get();
             if (cityDetails == null) {
-                cabDetails.setCabStatus(Constant.CabStatusEnum.IN_TRANSIT.getCabStatus());
+                cabDetails.setCabStatus(Constant.CabStatusEnum.IN_TRANSIT);
             } else {
-                cabDetails.setCabStatus(Constant.CabStatusEnum.IDLE.getCabStatus());
+                cabDetails.setCabStatus(Constant.CabStatusEnum.IDLE);
                 cabDetails.setCityDetails(cityDetails);
             }
         }
@@ -43,7 +43,7 @@ public class CabRepository {
         CabDetails cabDetails = new CabDetails();
         cabDetails.setCabId(cabId);
         cabDetails.setCabRegNumber(cabDetailsDto.getRegNumber());
-        cabDetails.setCabStatus(Constant.CabStatusEnum.IDLE.getCabStatus());
+        cabDetails.setCabStatus(Constant.CabStatusEnum.IDLE);
         Optional<CityDetails> cityDetailsOptional = cityRepository.getCityByName(cabDetailsDto.getCityName());
         if (!cityDetailsOptional.isPresent()) {
             throw new RuntimeException("Invalid city");

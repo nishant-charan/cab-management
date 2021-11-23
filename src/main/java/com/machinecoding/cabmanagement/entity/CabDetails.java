@@ -6,7 +6,7 @@ public class CabDetails {
 
     private String cabRegNumber;
 
-    private String cabStatus;
+    private Enum cabStatus;
 
     private CityDetails cityDetails;
 
@@ -26,11 +26,11 @@ public class CabDetails {
         this.cabRegNumber = cabRegNumber;
     }
 
-    public String getCabStatus() {
+    public Enum getCabStatus() {
         return cabStatus;
     }
 
-    public void setCabStatus(String cabStatus) {
+    public void setCabStatus(Enum cabStatus) {
         this.cabStatus = cabStatus;
     }
 

@@ -69,7 +69,7 @@ public class CabRepositoryTest {
 
         Optional<CabDetails> cabDetailsOptional = cabRepository.findById(savedDetails.getCabId());
         assertTrue(cabDetailsOptional.isPresent());
-        assertEquals(Constant.CabStatusEnum.IN_TRANSIT.getCabStatus(), cabDetailsOptional.get().getCabStatus());
+        assertEquals(Constant.CabStatusEnum.IN_TRANSIT, cabDetailsOptional.get().getCabStatus());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class CabRepositoryTest {
 
         Optional<CabDetails> cabDetailsOptional = cabRepository.findById(savedDetails.getCabId());
         assertTrue(cabDetailsOptional.isPresent());
-        assertEquals(Constant.CabStatusEnum.IDLE.getCabStatus(), cabDetailsOptional.get().getCabStatus());
+        assertEquals(Constant.CabStatusEnum.IDLE, cabDetailsOptional.get().getCabStatus());
     }
 
     @Test
