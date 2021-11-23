@@ -27,3 +27,4 @@ Bonus:
   c. Find cities where the demand for cabs is high and the time when the demand is highest
  
 #All of the bonus points can be captured using CabStatusTracking class
+#We should be using databases like MySQL to capture details of cab, and its status.
